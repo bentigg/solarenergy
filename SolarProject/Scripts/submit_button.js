@@ -1,7 +1,5 @@
-﻿$(function () {
-    $("input[type=submit], a, button")
-        .button()
-        .click(function (event) {
-            event.preventDefault();
-        });
+﻿$(document).ready(function() {
+    $("#createProfileButton").click(function () {
+        alert("You attempted to create a profile.");
+    });
 });

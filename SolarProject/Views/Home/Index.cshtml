@@ -13,7 +13,7 @@
 <div class="ui-widget">
     <label for="city">City or Zip: </label>
     <input id="city" />
-    <button>Create Profile</button>
+    <input id="createProfileButton" type="submit" value="Create Profile" />
 </div>
 <ol class="round">
     <li class="one">
@@ -43,46 +43,6 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-<script>
-    $("button").button();
-    $("button").click(function () { alert('You tried to create a profile.'); return false; });
-    function log(message) {
-        $("<div>").text(message).prependTo("#log");
-        $("#log").scrollTop(0);
-    }
-    $("#city").autocomplete({
-        source: function (request, response) {
-            $.ajax({
-                url: "http://ws.geonames.org/searchJSON",
-                dataType: "jsonp",
-                data: {
-                    featureClass: "P",
-                    style: "full",
-                    maxRows: 12,
-                    name_startsWith: request.term
-                },
-                success: function (data) {
-                    response($.map(data.geonames, function (item) {
-                        return {
-                            label: item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
-                            value: item.name
-                        }
-                    }));
-                }
-            });
-        },
-        minLength: 2,
-        select: function (event, ui) {
-            log(ui.item ?
-                    "Selected: " + ui.item.label :
-                    "Nothing selected, input was " + this.value);
-        },
-        open: function () {
-            $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
-        },
-        close: function () {
-            $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
-        }
-    });
-</script>
+<script src="../../Scripts/submit_button.js"></script>
+<script src="../../Scripts/CityStateAutoComplete.js"></script>
 
